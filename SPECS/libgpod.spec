@@ -15,11 +15,23 @@
 Summary: Library to access the contents of an iPod
 Name: libgpod
 Version: 0.8.2
-Release: 12%{?dist}
+Release: 13%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://www.gtkpod.org/libgpod.html
 Source0: http://downloads.sourceforge.net/gtkpod/%{name}-%{version}.tar.bz2
+
+# The version of libgpod in EPEL is newer than the version release in RHEL-7.4,
+# and therefore in CentOS-7 (1708).
+# This will lead to an update error in CentOS-7 if you have libgpod from EPEL installed.
+# You can use yum downgrade libgpod to bring in the proper libgpod, and after it completes,
+# then continue with your upgrade with a yum update.
+#
+# https://bugzilla.redhat.com/show_bug.cgi?id=1455268
+# https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7?action=show&redirect=Manuals%2FReleaseNotes%2FCentOS7.1708#head-281c090cc4fbc6bb5c7d4cd82a266fce807eee7c
+#
+# Fix for DeskOS:
+Epoch: 1
 
 # upstreamable patch: reduce pkgconfig-related overlinking
 # 
@@ -211,6 +223,9 @@ echo "D /var/run/%{name} 0755 root root -" > \
 %endif
 
 %changelog
+* Thu Jan 25 2018 Ricardo Arguello <rarguello@deskosproject.org> - 1:0.8.2-13
+- Rebuilt for DeskOS
+
 * Thu Mar 09 2017 Kalev Lember <klember@redhat.com> - 0.8.2-12
 - Rebuilt for libplist 1.2
 - Related: #1430798

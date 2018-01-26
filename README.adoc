@@ -1,0 +1,5 @@
+= DeskOS: libgpod RPM
+
+This is the _libgpod_ RPM package for the *DeskOS* operating system.
+
+Upstream comes from a CentOS 7.
